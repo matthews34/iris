@@ -1,0 +1,1 @@
+CREATE TABLE Testes (teste INTEGER)
