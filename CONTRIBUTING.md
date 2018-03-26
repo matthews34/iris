@@ -19,14 +19,13 @@ https://docs.docker.com/compose/install/.
 
 ## Setup
 
-- To set up the Data Base server for development, run:
+- To set up the api server for development, run:
   ```
-  docker-compose build
   docker-compose up
   ```
-  **NOTE:** These commands will **create a Docker image for the Data Base**,
+  **NOTE:** These commands will **create a Docker image for the Api**,
   and **load the server**. By default, the Data Base will be available at
-  `localhost:8080`.
+  `localhost:3000`.
 
 ## Running Postgresql through docker
 

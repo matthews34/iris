@@ -2,19 +2,33 @@ version: '3.1'
 
 services:
 
-  db:
-    image: postgres
-    restart: 'no'
+  server:
+    image: postgrest/postgrest
+    ports:
+      - "3000:3000"
+    links:
+      - db:db
     environment:
-      POSTGRES_USER: 'iris'
-      POSTGRES_PASSWORD: 'jundiahy'
+      PGRST_DB_URI: postgres://iris:jundiahy@db:5432/sistema_iris
+      PGRST_DB_SCHEMA: public
+      PGRST_DB_ANON_ROLE: iris
+
+  db:
+    image: postgres:10.3-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: sistema_iris
+      POSTGRES_USER: iris
+      POSTGRES_PASSWORD: jundiahy
     volumes:
       - 'db:/var/lib/postgresql/data'
-  adminer:
-    image: adminer
-    restart: 'no'
-    ports:
-      - 8080:8080
+  
+  crawler:
+    build: . 
+    command: sleep 30m
+    links:
+      - db:db
 
 volumes:
   db:
