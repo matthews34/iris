@@ -27,6 +27,8 @@ services:
   crawler:
     build: . 
     command: sleep 30m
+    volumes:
+      - './crawler:/usr/src/crawler'
     links:
       - db:db
 
